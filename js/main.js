@@ -42,7 +42,7 @@ $(function(){
 	    var tasti = $(svgDoc).find('.tasto');
 	    
 	    $(tasti).click(function(oEvent){
-	    	oEvent.preventDefault()
+	    	oEvent.preventDefault();
 	    	var osc_name = $(this).attr('id');
 	    	var osc = oscillatori[osc_name];
 	    	var waveform = [];
@@ -54,18 +54,14 @@ $(function(){
 				// }
 				// setWaveForm(values,osc_name);
 				setRandomOsc(osc);
-				osc.on = 1;
-	    		Pd.send(osc_name+'_freq',[parseFloat(osc.freq)]);
-				Pd.send(osc_name+'_amt',[parseFloat(osc.amt)]);
-				Pd.send(osc_name+'_on',[osc.on]);
+		    	turnOnOsc(osc);
+		    	sendToPatchOsc(osc_name, osc);
 				
 	    	}
 	    	else {
 	    		$(this).css('fill','eee');
-	    		osc.on = 0;
-	    		Pd.send(osc_name+'_freq',[parseFloat(osc.freq)]);
-				Pd.send(osc_name+'_amt',[parseFloat(0)]);
-				Pd.send(osc_name+'_on',[osc.on]);
+	    		turnOffOsc(osc);
+		    	sendToPatchOsc(osc_name, osc);
 	    		
 	    	}
 	    	return false;
@@ -76,13 +72,10 @@ $(function(){
 	    	e.preventDefault();
 	    	var osc_name = $(this).attr('id');
 	    	var osc = oscillatori[osc_name];
-	    	setRandomOsc(osc);
-	    	osc.on = 1;
 	    	$(this).css('fill','E5DD7F');
-
-	    	Pd.send(osc_name+'_freq',[parseFloat(osc.freq)]);
-			Pd.send(osc_name+'_amt',[parseFloat(osc.amt)]);
-			Pd.send(osc_name+'_on',[parseFloat(osc.on)]);
+	    	setRandomOsc(osc);
+	    	turnOnOsc(osc);
+	    	sendToPatchOsc(osc_name, osc);
 	    	return false;
 	    });
 
@@ -91,15 +84,25 @@ $(function(){
 	    	var osc_name = $(this).attr('id');
 	    	var osc = oscillatori[osc_name];
 	    	$(this).css('fill','eee');
-			Pd.send(osc_name+'_on',[parseFloat(osc.on)]);
+	    	turnOffOsc(osc);
+	    	sendToPatchOsc(osc_name, osc);
 	    	return false;
 	    });
 	});
 });
 
-function triggerOsc(osc) {
-	patch.send(osc_name+'_freq',[parseFloat(osc.freq)]);
-	patch.send(osc_name+'_amt',[parseFloat(osc.amt)]);
+function turnOnOsc(osc){
+	osc.on = 1;
+}
+
+function turnOffOsc(osc){
+	osc.on = 0;
+}
+
+function sendToPatchOsc(osc_name, osc) {
+	Pd.send(osc_name+'_freq',[parseFloat(osc.freq)]);
+	Pd.send(osc_name+'_amt',[parseFloat(osc.amt)]);
+	Pd.send(osc_name+'_on',[parseFloat(osc.on)]);
 }
 
 function setWaveForm(values, osc_name){
