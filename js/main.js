@@ -6,13 +6,13 @@ $(function(){
 		var patch;
 
 		var oscillatori = {
-			main_osc   : {freq: 10000,amt : 1, on : 0},
-			mod_osc_01 : {freq: Math.random()*1000, amt : 10, on : 0},
-			mod_osc_02 : {freq: Math.random()*1000, amt : 10, on : 0},
-			mod_osc_03 : {freq: Math.random()*1000, amt : 10, on : 0},
-			mod_osc_04 : {freq: Math.random()*1000, amt : 10, on : 0},
-			mod_osc_05 : {freq: Math.random()*1000, amt : 10, on : 0},
-			mod_osc_06 : {freq: Math.random()*1000,amt : 10, on : 0}
+			main_osc   : {freq: 16000,amt : 1, on : 0},
+			mod_osc_01 : {freq: Math.random()*100, amt : 10, on : 0},
+			mod_osc_02 : {freq: Math.random()*100, amt : 10, on : 0},
+			mod_osc_03 : {freq: Math.random()*100, amt : 10, on : 0},
+			mod_osc_04 : {freq: Math.random()*100, amt : 10, on : 0},
+			mod_osc_05 : {freq: Math.random()*100, amt : 10, on : 0},
+			mod_osc_06 : {freq: Math.random()*100,amt : 10, on : 0}
 		};
 
 		var mainOsc = new Oscillator('main_osc');
@@ -26,7 +26,7 @@ $(function(){
 			mainOsc.setWaveform(osc['wavetable']);
 		});
 
-		$.get('./patches/crackleWeb_wave.pd', function(patchFile) {
+		$.get('./patches/crackleWeb_wave_with_master.pd', function(patchFile) {
 			patch = Pd.loadPatch(patchFile);
 			Pd.start();
 			Pd.send('main_osc_freq',[parseFloat(5000)]);
