@@ -4,6 +4,21 @@ $(function(){
 		// then load this into a WebPd patch,
 		// which we then start.
 		var patch;
+		var xRate, yRate, zRate;
+
+		if (window.DeviceMotionEvent != undefined) {
+			window.ondevicemotion = function(e) {
+				xRate = parseInt(event.accelerationIncludingGravity.x * 5);
+				yRate = parseInt(event.accelerationIncludingGravity.y * 5);
+				zRate = parseInt(event.accelerationIncludingGravity.z * 5);
+
+				Pd.send('volAmt',[scale(yRate,-50,50)]);
+				Pd.send('crushAmt',[scale(xRate, 10, 8000)]);
+				console.log('xRate : ', xRate);
+				console.log('yRate : ', yRate);
+				console.log('zRate : ', zRate);
+			}
+		}
 
 		var oscillatori = {
 			main_osc   : {freq: 16000,amt : 1, on : 0},
@@ -48,11 +63,6 @@ $(function(){
 	    	var waveform = [];
 	    	if(osc.on == 0){
 	    		$(this).css('fill','E5DD7F');
-	    		// var values = [];
-	   //  		for (i=0;i<512;i++){
-				// 	values.push(Math.random());
-				// }
-				// setWaveForm(values,osc_name);
 				setRandomOsc(osc);
 		    	turnOnOsc(osc);
 		    	sendToPatchOsc(osc_name, osc);
@@ -117,5 +127,8 @@ function setRandomOsc (osc){
 	osc.amt = Math.random()*10;
 }
 
+function scale (val,min, max){
+	return (val - min) / max - min;
+}
 //recupera array
 //

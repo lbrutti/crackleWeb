@@ -1,6 +1,6 @@
-#N canvas 21 86 1280 751 10;
+#N canvas 32 23 1280 751 10;
 #X obj 10 23 float;
-#X obj 550 485 osc~;
+#X obj 549 375 osc~;
 #X obj 10 46 osc~;
 #X text 1053 207 Fundamental freq;
 #X obj 206 26 float;
@@ -22,8 +22,8 @@
 #X obj 836 -21 r mod_osc_05_freq;
 #X obj 1056 -21 r mod_osc_06_freq;
 #X obj 624 -5 r mod_osc_04_freq;
-#X obj 536 438 *~;
-#X obj 531 554 dac~;
+#X obj 549 335 *~;
+#X obj 549 524 dac~;
 #X obj 1053 226 r main_osc_freq;
 #X obj 13 159 *~;
 #X obj 209 166 *~;
@@ -49,9 +49,13 @@
 #X obj 701 91 r mod_osc_04_amt;
 #X obj 857 47 r mod_osc_05_on;
 #X obj 925 76 r mod_osc_05_amt;
+#X obj 600 385 phasor~ 8000;
+#X obj 549 471 *~;
+#X obj 583 431 r volAmt;
+#X obj 600 350 r crushAmt;
+#X obj 549 406 *~;
 #X connect 0 0 2 0;
-#X connect 1 0 24 1;
-#X connect 1 0 24 0;
+#X connect 1 0 54 0;
 #X connect 2 0 26 0;
 #X connect 4 0 5 0;
 #X connect 5 0 27 0;
@@ -98,3 +102,9 @@
 #X connect 47 0 36 1;
 #X connect 48 0 35 0;
 #X connect 49 0 35 1;
+#X connect 50 0 54 1;
+#X connect 51 0 24 0;
+#X connect 51 0 24 1;
+#X connect 52 0 51 1;
+#X connect 53 0 50 0;
+#X connect 54 0 51 0;
