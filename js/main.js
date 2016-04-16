@@ -14,9 +14,9 @@ $(function(){
 
 				Pd.send('volAmt',[scale(yRate,-50,50)]);
 				Pd.send('crushAmt',[scale(xRate, 10, 8000)]);
-				console.log('xRate : ', xRate);
-				console.log('yRate : ', yRate);
-				console.log('zRate : ', zRate);
+				//console.log('xRate : ', xRate);
+				//console.log('yRate : ', yRate);
+				//console.log('zRate : ', zRate);
 			}
 		}
 
@@ -128,7 +128,7 @@ function setRandomOsc (osc){
 }
 
 function scale (val,min, max){
-	return (val - min) / max - min;
+	return (val - min) / (max - min);
 }
 //recupera array
 //
