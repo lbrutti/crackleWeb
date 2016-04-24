@@ -1,8 +1,5 @@
 $(function(){
 	$(window).load(function () {
-		// We Get the patch file with an Ajax request, 
-		// then load this into a WebPd patch,
-		// which we then start.
 		var patch;
 		var xRate, yRate, zRate;
 
@@ -130,5 +127,3 @@ function setRandomOsc (osc){
 function scale (val,min, max){
 	return (val - min) / (max - min);
 }
-//recupera array
-//
